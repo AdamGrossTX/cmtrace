@@ -14,6 +14,7 @@ try {
     $FileExists = Test-Path -Path "$SourceDir\$FileName"
 
     if(-not $FileExists) {
+        New-Item -Path $SourceDir -ItemType Directory -Force -ErrorAction SilentlyContinue
         $Result = Invoke-WebRequest -UseBasicParsing -Uri $URL -OutFile $OutFile -ErrorAction SilentlyContinue -Verbose
         if (-not $OutFile) {
             Write-Host "Failed to download CMTrace.exe"
